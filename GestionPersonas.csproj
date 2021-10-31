@@ -11,6 +11,12 @@
     <None Remove="Resources\icons8-google-web-search-24.png" />
     <None Remove="Resources\icons8-guardar-48.png" />
     <None Remove="Resources\icons8-nuevo-48.png" />
+    <None Remove="UI\Registros\agregar.png" />
+    <None Remove="UI\Registros\bus.jpg" />
+    <None Remove="UI\Registros\eli.jpg" />
+    <None Remove="UI\Registros\guar.jpg" />
+    <None Remove="UI\Registros\nue.jpg" />
+    <None Remove="UI\Registros\remover.jpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -39,6 +45,15 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="UI\Registros\agregar.png" />
+    <Resource Include="UI\Registros\bus.jpg" />
+    <Resource Include="UI\Registros\eli.jpg" />
+    <Resource Include="UI\Registros\guar.jpg" />
+    <Resource Include="UI\Registros\nue.jpg" />
+    <Resource Include="UI\Registros\remover.jpg" />
   </ItemGroup>
 
   <ItemGroup>
