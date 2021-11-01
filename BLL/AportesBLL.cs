@@ -34,6 +34,14 @@ namespace GestionPersonas.BLL
             try
             {
                 //Agregar la entidad que se desea insertar al contexto
+
+                foreach (var item in aporte.Detalle)
+                {
+                    TipoAportes tipoAporte = contexto.tipoAportes.Find(item.TipoAporteId);
+                    tipoAporte.MontoLogrado += item.Monto;
+                    ModificarTiposAportes(tipoAporte);
+                }
+
                 contexto.Aportes.Add(aporte);
                 paso = contexto.SaveChanges() > 0;
             }
@@ -55,6 +63,30 @@ namespace GestionPersonas.BLL
 
             try
             {
+               
+                var AporteAntes = contexto.Aportes.Where(x => x.AporteId == aporte.AporteId).Include(x => x.Detalle).AsNoTracking().SingleOrDefault();
+
+                foreach (var item in AporteAntes.Detalle)
+                {
+                    TipoAportes tipoAporte = contexto.tipoAportes.Find(item.TipoAporteId);
+                    tipoAporte.MontoLogrado -= item.Monto;
+                    ModificarTiposAportes(tipoAporte);
+                }
+
+                
+                contexto.Database.ExecuteSqlRaw($"Delete FROM AportesDetalle Where AporteId={aporte.AporteId}");
+
+               
+                foreach (var item in aporte.Detalle)
+                {
+                    item.Id = 0;
+                    TipoAportes tipoAporte = contexto.tipoAportes.Find(item.TipoAporteId);
+                    tipoAporte.MontoLogrado += item.Monto;
+                    ModificarTiposAportes(tipoAporte);
+                    contexto.Entry(item).State = EntityState.Added;
+                }
+
+
                 contexto.Entry(aporte).State = EntityState.Modified;
                 paso = contexto.SaveChanges() > 0;
             }
@@ -74,10 +106,18 @@ namespace GestionPersonas.BLL
             Contexto contexto = new Contexto();
             try
             {
-                var Aportes = contexto.Aportes.Find(id);
+                var Aportes = Buscar(id);
 
                 if (Aportes != null)
                 {
+
+                    foreach (var item in Aportes.Detalle)
+                    {
+                        TipoAportes tipoAporte = contexto.tipoAportes.Find(item.TipoAporteId);
+                        tipoAporte.MontoLogrado -= item.Monto;
+                        ModificarTiposAportes(tipoAporte);
+                    }
+
                     contexto.Aportes.Remove(Aportes);
                     paso = contexto.SaveChanges() > 0;
                 }
@@ -99,7 +139,7 @@ namespace GestionPersonas.BLL
 
             try
             {
-                Aporte = contexto.Aportes.Find(id);
+                Aporte = contexto.Aportes.Where(x => x.AporteId == id).Include(x => x.Detalle).SingleOrDefault();
             }
             catch (Exception)
             {
@@ -148,7 +188,7 @@ namespace GestionPersonas.BLL
             }
             return encontrado;
         }
-        public static bool ExisteConcepton(string concepto)
+        public static bool ExisteConcepto(string concepto)
         {
             Contexto contexto = new Contexto();
             bool encontrado = false;
@@ -203,5 +243,26 @@ namespace GestionPersonas.BLL
             return lista;
         }
 
+        public static bool ModificarTiposAportes(TipoAportes tipoAporte)
+        {
+            bool paso = false;
+            Contexto contexto = new Contexto();
+
+            try
+            {
+
+                contexto.Entry(tipoAporte).State = EntityState.Modified;
+                paso = contexto.SaveChanges() > 0;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                contexto.Dispose();
+            }
+            return paso;
+        }
     }
 }

@@ -12,20 +12,24 @@ namespace GestionPersonas.Entidades
         [Key]
         public int TipoAporteId { get; set; }
         public string Descripcion { get; set; }
-
+        public double MontoDeseado { get; set; }
+        public double MontoLogrado { get; set; } 
 
         public TipoAportes()
         {
             TipoAporteId = 0;
             Descripcion = string.Empty;
-
+            MontoDeseado = 0;
+            MontoLogrado = 0;
 
         }
-        public TipoAportes(int tipoAporteId, string descripcion)
+
+        public TipoAportes(int tipoAporteId, string descripcion, double montoDeseado, double montoLogrado)
         {
             TipoAporteId = tipoAporteId;
-            Descripcion = descripcion;
-
+            Descripcion = descripcion ?? throw new ArgumentNullException(nameof(descripcion));
+            MontoDeseado = montoDeseado;
+            MontoLogrado = montoLogrado;
         }
     }
 }

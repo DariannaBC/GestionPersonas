@@ -12,33 +12,26 @@ namespace GestionPersonas.Entidades
         [Key]
         public int Id { get; set; }
         public int AporteId { get; set; }
-        public int TipoAportesId { get; set; }
+        public int TipoAporteId { get; set; } 
         public double Monto { get; set; }
-        public double Total { get; set; }
-        public double MontoDeseado { get; set; }
-
+        
         public AportesDetalle()
         {
             Id = 0;
             AporteId = 0;
-            TipoAportesId = 0;
+            TipoAporteId = 0;
             Monto = 0;
-            MontoDeseado = 0;
-            Total = 0;
+            
 
 
         }
-        public AportesDetalle(int id, int aporteId, int tipoAportesId, double monto, double montoDeseado, double total)
+
+        public AportesDetalle(int id, int aporteId, int tipoAportesId, double monto)
         {
             Id = id;
             AporteId = aporteId;
-            TipoAportesId = tipoAportesId;
+            TipoAporteId = tipoAportesId;
             Monto = monto;
-            MontoDeseado = montoDeseado;
-            Total = total;
-
-
         }
-
     }
 }

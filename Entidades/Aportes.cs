@@ -15,9 +15,9 @@ namespace GestionPersonas.Entidades
         public DateTime Fecha { get; set; }
         public int PersonaId { get; set; }
         public string Concepto { get; set; }
-        public double Monto { get; set; }
+        public double MontoTotal { get; set; }
 
-        [ForeignKey("TipoAporteId")]
+        [ForeignKey("AporteId")]
         public List<AportesDetalle> Detalle { get; set; } = new List<AportesDetalle>();
 
         public Aportes()
@@ -26,7 +26,7 @@ namespace GestionPersonas.Entidades
             Fecha = DateTime.Now;
             PersonaId = 0;
             Concepto = string.Empty;
-            Monto = 0;
+            MontoTotal = 0;
         }
 
         public Aportes(int aporteId, DateTime fecha, int personaId, string concepto, double monto)
@@ -35,7 +35,7 @@ namespace GestionPersonas.Entidades
             Fecha = fecha;
             PersonaId = personaId;
             Concepto = concepto;
-            Monto = monto;
+            MontoTotal = monto;
         }
 
     }
