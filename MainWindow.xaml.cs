@@ -46,7 +46,7 @@ namespace GestionPersonas
 
         private void AportesMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            rAportes aportes = rAportes();
+            rAportes aportes = new rAportes();
             aportes.Show();
         }
     }

@@ -7,6 +7,9 @@ using GestionPersonas.Entidades;
 using GestionPersonas.DAL;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
+using GestionPersonas.DAL;
+using GestionPersonas.Entidades;
+
 
 namespace GestionPersonas.BLL
 {

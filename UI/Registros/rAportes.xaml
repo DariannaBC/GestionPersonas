@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GestionPersonas.UI.Registros"
         mc:Ignorable="d"
-        Title="rAportes" Height="450" Width="800">
+        Title="rAportes" Height="450" Width="850">
     <Grid>
         <StackPanel Orientation="Vertical" Margin="10,10,-89,-60">
 
@@ -17,22 +17,31 @@
                     <Button x:Name="BuscarButton" Margin="5,0" Click="BuscarButton_Click" >
                         <StackPanel Orientation="Horizontal">
                             <Image Source="/UI/Registros/bus.jpg"  />
-                           
+
                         </StackPanel>
                     </Button>
                     <Label Content="Fecha" Margin="150,0,0,0"/>
-                    <DatePicker x:Name="FechaDatePicker" SelectedDate="{Binding Fecha}" Width="184" />
+                    <DatePicker x:Name="FechaDatePicker" SelectedDate="{Binding Fecha}" Width="170" />
 
                 </StackPanel>
-
-                <StackPanel Orientation="Horizontal" Margin="-70,7,0,0" Height="30" Width="577">
-                    <Label x:Name="ConceptoLabel" Content="Concepto"/>
-                    <TextBox x:Name="ConceptoTextBox" Height="22" Width="430" />
+                <StackPanel Orientation="Horizontal" Height="29" Width="527" RenderTransformOrigin="0.5,0.5">
+                    <StackPanel.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleY="-1"/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </StackPanel.RenderTransform>
+                    <StackPanel Orientation="Horizontal" Margin="0">
+                        <Label x:Name="ConceptoLabel" Content="Concepto" Margin="-180,0"/>
+                        <TextBox x:Name="ConceptoTextBox" Height="22" Width="230" Margin="-110"/>
+                    </StackPanel>
                 </StackPanel>
             </StackPanel>
             <StackPanel Orientation="Vertical">
                 <Label Content="Persona Id:"/>
-                <ComboBox x:Name="PersonaIdComboBox" Text="{Binding PersonaId}" Width="255" Height="20" Margin="-300,-30,-40,-10"/>
+                <ComboBox x:Name="PersonaIdComboBox" Text="{Binding PersonaId}" Width="255" Height="20" Margin="-530,-30,-40,-10"/>
             </StackPanel>
 
 
@@ -56,7 +65,7 @@
 
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="5">
-                <DataGrid x:Name="DetalleDataGrid" ItemsSource="{Binding Detalle}" Height="160" AutoGenerateColumns="False" SelectionChanged="DetalleDataGrid_SelectionChanged" Width="473" >
+                <DataGrid x:Name="DetalleDataGrid" ItemsSource="{Binding Detalle}" Height="180" AutoGenerateColumns="False" SelectionChanged="DetalleDataGrid_SelectionChanged" Width="300" >
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Aporte Id" Binding="{Binding AporteId}"  />
                         <DataGridTextColumn Header="Tipo Aporte" Binding="{Binding TipoAporteId}"/>
@@ -67,20 +76,20 @@
             <StackPanel Orientation="Horizontal">
                 <Button x:Name="RemoverPermiso" Click="RemoverPermiso_Click_1"  Margin="5,0,0,0" Width="86" Height="26">
 
-                    <StackPanel Orientation="Horizontal" Margin="5,0,0,0">
+                    <StackPanel Orientation="Horizontal" Margin="-50,0">
                         <Image Source="/UI/Registros/remover.jpg" />
-                        <Label Content="Remover" Height="32"/>
+                        <Label Content="Remover" Height="40" Width="60"/>
                     </StackPanel>
                 </Button>
 
-                <Label x:Name="MontoFinalLabel" Content="Monto" Margin="240,0,0,0" />
+                <Label x:Name="MontoFinalLabel" Content="Monto" Margin="-4,0,0,0" />
                 <TextBox x:Name="MontoFinalTextBox" Height="30" Width="100" IsReadOnly="True" />
 
 
             </StackPanel>
 
 
-            <StackPanel Orientation="Horizontal"  HorizontalAlignment="Center" Margin="8" >
+            <StackPanel Orientation="Horizontal"  HorizontalAlignment="Left" Margin="-20" >
                 <Button x:Name="NButton" Height="30" Width="70" Margin="30" Click="NButton_Click" VerticalContentAlignment="Center" Cursor="ScrollNE" >
 
                     <AutomationProperties.LabeledBy>
